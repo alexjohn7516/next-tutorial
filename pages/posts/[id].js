@@ -11,6 +11,9 @@ export default function Post({ postData }) {
       {postData.id}
       <br />
       {postData.date}
+      <br />
+      {/* ? a div with a closing tage? */}
+      <div dangerouslySetInnerHTML={{__html: postData.contentHtml }} />
     </Layout>
   );
 }
@@ -28,7 +31,7 @@ export async function getStaticPaths() {
 //* [3 of 3]
 //* Make a server side render to get props from specific ID that was entered into the URL. This render is done statically with the page load.
 export async function getStaticProps({ params }) {
-  const postData = getPostData(params.id);
+  const postData = await getPostData(params.id);
   return {
     props: {
       postData,
